@@ -6,7 +6,6 @@ namespace Database\Seeders;
 use App\Models\Booking;
 use App\Models\Cart;
 use App\Models\CartItem;
-use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Staff;
@@ -28,8 +27,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
         ]);
-
-
 
         // Create Customers
         $customers = User::factory(10)->create([
