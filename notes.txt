@@ -1,0 +1,103 @@
+
+https://chatgpt.com/share/67d335c5-4560-8004-88a3-8861818239be
+
+Tables and Relationships
+staff (Stores staff members)
+
+id (PK, Auto Increment)
+name (String)
+email (String, Unique)
+phone (String, Nullable)
+gender (Enum: male, female, other)
+status (Boolean, Default: 1 for active)
+created_at (Timestamp)
+updated_at (Timestamp)
+services (Stores services offered)
+
+id (PK, Auto Increment)
+name (String)
+description (Text, Nullable)
+duration (Integer, Duration in minutes)
+price (Decimal, 10,2)
+status (Boolean, Default: 1 for active)
+created_at (Timestamp)
+updated_at (Timestamp)
+staff_services (Many-to-Many: Staff providing specific services)
+
+id (PK, Auto Increment)
+staff_id (FK → staff.id, CASCADE)
+service_id (FK → services.id, CASCADE)
+created_at (Timestamp)
+updated_at (Timestamp)
+customers (Stores customer details)
+
+id (PK, Auto Increment)
+first_name (String)
+last_name (String)
+email (String, Unique)
+phone (String)
+gender (Enum: male, female, other)
+created_at (Timestamp)
+updated_at (Timestamp)
+bookings (Stores booking details)
+
+id (PK, Auto Increment)
+customer_id (FK → customers.id, CASCADE)
+staff_id (FK → staff.id, CASCADE)
+date (Date)
+time (Time)
+total_price (Decimal, 10,2)
+status (Enum: pending, confirmed, canceled, completed)
+created_at (Timestamp)
+updated_at (Timestamp)
+booking_services (Many-to-Many: Services in a booking)
+
+id (PK, Auto Increment)
+booking_id (FK → bookings.id, CASCADE)
+service_id (FK → services.id, CASCADE)
+quantity (Integer, Default: 1)
+price (Decimal, 10,2) (Store service price at time of booking)
+created_at (Timestamp)
+updated_at (Timestamp)
+payments (Stores payment details)
+
+id (PK, Auto Increment)
+booking_id (FK → bookings.id, CASCADE)
+payment_method (Enum: cash, card, online)
+transaction_id (String, Nullable)
+amount (Decimal, 10,2)
+status (Enum: pending, paid, failed, refunded)
+created_at (Timestamp)
+updated_at (Timestamp)
+carts (Temporary cart before booking confirmation)
+
+id (PK, Auto Increment)
+customer_id (FK → customers.id, Nullable)
+session_id (String, Unique) (For guest users)
+created_at (Timestamp)
+updated_at (Timestamp)
+cart_items (Stores services added to cart)
+
+id (PK, Auto Increment)
+cart_id (FK → carts.id, CASCADE)
+service_id (FK → services.id, CASCADE)
+quantity (Integer, Default: 1)
+price (Decimal, 10,2)
+created_at (Timestamp)
+updated_at (Timestamp)
+
+
+
+
+
+
+Relationships
+staff ⬌ services (Many-to-Many via staff_services)
+customers ⬌ bookings (One-to-Many)
+staff ⬌ bookings (One-to-Many)
+bookings ⬌ services (Many-to-Many via booking_services)
+bookings ⬌ payments (One-to-One)
+carts ⬌ cart_items (One-to-Many)
+customers ⬌ carts (One-to-One)
+
+
