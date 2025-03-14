@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ServiceController;
@@ -16,34 +17,33 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Default Home Route
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth'])->group(function () {
+// Admin Routes (Only Admin can access)
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    // Admin can manage everything
     Route::resource('services', ServiceController::class);
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
-
-Route::middleware(['auth'])->group(function () {
     Route::resource('staff', StaffController::class);
-});
-
-Route::middleware(['auth'])->group(function () {
     Route::resource('customers', CustomerController::class);
-});
-
-Route::middleware(['auth'])->group(function () {
     Route::resource('bookings', BookingController::class);
 });
 
+// Customer Routes (Only Customer can access)
+Route::middleware(['auth', 'role:customer'])->group(function () {
+    Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
+
+    // Customers can only see their own bookings
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
+});
+
+// Get staff services (Common for both roles)
 Route::get('/get-staff-services/{staff}', function ($staff) {
     $staff = Staff::with('services:id,name,price')->find($staff);
-
-    if (!$staff) {
-        return response()->json([]);
-    }
-
-    return response()->json($staff->services);
+    return response()->json($staff ? $staff->services : []);
 })->name('staff.services');

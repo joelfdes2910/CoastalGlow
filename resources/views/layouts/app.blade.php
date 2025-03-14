@@ -51,24 +51,43 @@
                                 </li>
                             @endif
                         @else
-
                             <ul class="navbar-nav">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('services.index') }}">Services</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('staff.index') }}">Staff</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('customers.index') }}">Customer</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{ route('bookings.index') }}">Bookings</a></li>
+
+
+                                @if(auth()->user()->role === 'admin')
+
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    </li>
+
+
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('services.index') }}">Services</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('staff.index') }}">Staff</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('customers.index') }}">Customers</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('bookings.index') }}">Bookings</a></li>
+                                @endif
+
+                                @if(auth()->user()->role === 'customer')
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('customer.dashboard') }}">Dashboard</a>
+                                        </li>
+
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('bookings.index') }}">My Bookings</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('bookings.create') }}">New Booking</a></li>
+                                @endif
                             </ul>
 
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                   document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -77,10 +96,9 @@
                                     </form>
                                 </div>
                             </li>
-
-
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>

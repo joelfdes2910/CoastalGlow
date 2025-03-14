@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    public function dashboard()
+    {
+        return view('customer.dashboard'); // Make sure this view exists
+    }
+
     public function index()
     {
         $customers = Customer::latest()->paginate(10);
