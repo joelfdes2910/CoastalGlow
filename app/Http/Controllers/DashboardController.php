@@ -15,11 +15,6 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-    public function customerDashboard()
-    {
-        $bookings = Booking::where('customer_id', auth()->id())->get();
-        return view('customer.dashboard', compact('bookings'));
-    }
 
 
     public function index()

@@ -2,8 +2,9 @@
 
 @section('content')
     <div class="container">
-        <h2>Add Booking</h2>
-        <a href="{{ route('bookings.index') }}" class="btn btn-secondary mb-3">Back</a>
+        <h2 class="mb-3">Add Booking</h2>
+
+        {{--<a href="{{ route('bookings.index') }}" class="btn btn-secondary mb-3">Back</a>--}}
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -16,7 +17,7 @@
         @endif
 
 
-        <form action="{{ route('bookings.store') }}" method="POST">
+        <form action="{{ route('bookings.store') }}"  method="POST">
             @csrf
 
             <div class="mb-3">

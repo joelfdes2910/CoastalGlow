@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,8 @@ class CustomerController extends Controller
 {
     public function dashboard()
     {
-        return view('customer.dashboard'); // Make sure this view exists
+        $bookings = Booking::where('customer_id', auth()->id())->paginate(10);
+        return view('customer.dashboard', compact('bookings')); // Make sure this view exists
     }
 
     public function index()

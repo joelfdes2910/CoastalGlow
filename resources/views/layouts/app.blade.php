@@ -73,9 +73,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('customer.dashboard') }}">Dashboard</a>
                                         </li>
-
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('bookings.index') }}">My Bookings</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('bookings.create') }}">New Booking</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{ route('bookings.create') }}">New Booking</a></li>
                                 @endif
                             </ul>
 
