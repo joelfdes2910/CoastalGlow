@@ -33,13 +33,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 // Customer Routes (Only Customer can access)
 Route::middleware(['auth', 'role:customer'])->group(function () {
-    Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
-
     // Customers can only see their own bookings
-    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
     Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
-    Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
 });
 
 // Get staff services (Common for both roles)

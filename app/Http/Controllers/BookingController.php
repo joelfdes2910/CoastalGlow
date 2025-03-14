@@ -7,12 +7,21 @@ use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::latest()->paginate(10);
+        if (Auth::user()->role === 'admin') {
+            // Admin can see all bookings
+            $bookings = Booking::with('customer', 'staff', 'services')->paginate(10);
+        } else {
+            // Customers can only see their own bookings
+            $bookings = Booking::with('staff', 'services')
+                ->where('customer_id', Auth::id()) // Restrict to logged-in customer
+                ->paginate(10);
+        }
         return view('bookings.index', compact('bookings'));
     }
 

@@ -16,6 +16,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Services</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -26,6 +27,11 @@
                     <td>{{ $member->name }}</td>
                     <td>{{ $member->email }}</td>
                     <td>{{ $member->phone }}</td>
+                    <td>
+                        @foreach($member->services as $service)
+                            <span class="badge bg-primary">{{ $service->name }}</span>
+                        @endforeach
+                    </td>
                     <td>
                         <a href="{{ route('staff.edit', $member->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('staff.destroy', $member->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">

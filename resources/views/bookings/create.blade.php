@@ -22,11 +22,17 @@
 
             <div class="mb-3">
                 <label class="form-label">Customer</label>
-                <select name="customer_id" class="form-control" required>
-                    @foreach($customers as $customer)
-                        <option value="{{ $customer->id }}">{{ $customer->first_name }} {{ $customer->last_name }}</option>
-                    @endforeach
-                </select>
+
+                @if(Auth::user()->role === 'admin')
+                    <select name="customer_id" class="form-control" required>
+                        @foreach($customers as $customer)
+                            <option value="{{ $customer->id }}">{{ $customer->first_name }} {{ $customer->last_name }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <input type="hidden" name="customer_id" value="{{ Auth::id() }}">
+                    <input type="text" class="form-control" value="{{ Auth::user()->name }}" disabled>
+                @endif
             </div>
 
             <div class="mb-3">
