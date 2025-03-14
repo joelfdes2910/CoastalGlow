@@ -36,7 +36,7 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'customer_id' => 'required|exists:customers,id',
+            'customer_id' => 'required|exists:users,id', // Changed 'customers' to 'users'
             'staff_id' => 'required|exists:staff,id',
             'date' => 'required|date_format:Y-m-d',
             'time' => 'required|date_format:H:i',

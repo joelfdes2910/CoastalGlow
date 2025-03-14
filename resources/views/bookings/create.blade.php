@@ -23,15 +23,15 @@
             <div class="mb-3">
                 <label class="form-label">Customer</label>
 
-                @if(Auth::user()->role === 'admin')
+                @if(auth()->user()->role === 'admin')
                     <select name="customer_id" class="form-control" required>
                         @foreach($customers as $customer)
                             <option value="{{ $customer->id }}">{{ $customer->first_name }} {{ $customer->last_name }}</option>
                         @endforeach
                     </select>
                 @else
-                    <input type="hidden" name="customer_id" value="{{ Auth::id() }}">
-                    <input type="text" class="form-control" value="{{ Auth::user()->name }}" disabled>
+                    <input type="hidden" name="customer_id" value="{{ auth()->user()->id }}">
+                    <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>
                 @endif
             </div>
 

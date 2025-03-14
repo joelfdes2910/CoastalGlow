@@ -25,7 +25,7 @@
             @foreach($bookings as $booking)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $booking->customer->first_name }} {{ $booking->customer->last_name }}</td>
+                    <td>{{ $booking->customer->name }}</td>
                     <td>{{ $booking->staff->name }}</td>
                     <td>{{ $booking->date }}</td>
                     <td>{{ $booking->time }}</td>

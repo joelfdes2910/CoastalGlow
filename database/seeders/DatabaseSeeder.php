@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,66 +21,50 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\User::factory()->create([
-            'role' => 'customer',
-            'name' => 'Customer',
-            'email' => 'customer@customer.com',
-            'password' => Hash::make('customer'),
+        // Create Admin
+        User::factory()->create([
+            'role' => 'admin',
+            'name' => 'Admin User',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
         ]);
 
-         \App\Models\User::factory()->create([
-             'role' => 'admin',
-             'name' => 'Admin',
-             'email' => 'admin@admin.com',
-             'password' => Hash::make('admin'),
-         ]);
 
 
-		// Create staff
-        $staff = Staff::factory(5)->create();
+        // Create Customers
+        $customers = User::factory(10)->create([
+            'role' => 'customer',
+        ]);
 
-        // Create services
+        // Create Services
         $services = Service::factory(10)->create();
 
-        // Assign services to staff
-//        $staff->each(function ($staffMember) use ($services) {
-//            $staffMember->services()->syncWithoutDetaching(
-//                $services->random(rand(2, 5))->pluck('id')->toArray()
-//            );
-//        });
+        // Create Staff
+        $staff = Staff::factory(5)->create();
 
+        // Create Bookings
+        $bookings = Booking::factory(10)->create([
+            'customer_id' => $customers->random()->id,
+            'staff_id' => $staff->random()->id,
+        ]);
 
-        $staff->each(function ($staffMember) use ($services) {
-            $staffMember->services()->attach(
-                $services->random(rand(2, 5))->pluck('id')->toArray()
-            );
-        });
-
-
-        // Create customers
-        $customers = Customer::factory(10)->create();
-
-        // Create bookings
-        $bookings = Booking::factory(10)->create();
-
+        // Attach Services to Bookings
         $bookings->each(function ($booking) use ($services) {
             $booking->services()->attach(
                 $services->random(rand(1, 3))->pluck('id')->toArray(),
-                ['quantity' => rand(1, 3), 'price' => fake()->randomFloat(2, 10, 100)]
+                ['price' => fake()->randomFloat(2, 10, 100)]
             );
         });
 
-        // Create payments
+        // Create Payments for Bookings
         $bookings->each(function ($booking) {
             Payment::factory()->create(['booking_id' => $booking->id]);
         });
 
-        // Create carts
+        // Create Carts
         $carts = Cart::factory(10)->create();
 
-        // Create cart items
+        // Create Cart Items
         $carts->each(function ($cart) use ($services) {
             CartItem::factory(3)->create([
                 'cart_id' => $cart->id,

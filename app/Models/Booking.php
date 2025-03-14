@@ -11,8 +11,10 @@ class Booking extends Model
 
 	protected $fillable = ['customer_id', 'staff_id', 'date', 'time', 'total_price', 'status'];
 
-    public function customer() {
-        return $this->belongsTo(Customer::class);
+    // Customer Relation (Now Refers to Users Table)
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
     }
 
     public function staff() {
