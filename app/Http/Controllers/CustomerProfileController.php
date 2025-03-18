@@ -21,6 +21,7 @@ class CustomerProfileController extends Controller
         // Validate input
         $request->validate([
             'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
             'email' => ['required', 'email', Rule::unique('users')->ignore($customer->id)],
             'phone' => 'nullable|string|max:15',
         ]);
@@ -28,6 +29,7 @@ class CustomerProfileController extends Controller
         // Update customer details
         $customer->update([
             'name' => $request->name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
         ]);

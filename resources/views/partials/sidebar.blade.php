@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('admin.dashboard') }}" class="brand-link text-center">
-        <img src="{{ asset('lotus.png') }}" alt="SPA Logo" width="150">
+        <img src="{{ asset('lotus.png') }}" alt="SPA Logo" height="50">
     </a>
 
     <div class="sidebar">

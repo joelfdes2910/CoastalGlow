@@ -18,6 +18,12 @@
             </div>
 
             <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" name="last_name" class="form-control" value="{{ old('last_name', $customer->last_name) }}" required>
+                @error('last_name') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Email</label>
                 <input type="email" name="email" class="form-control" value="{{ old('email', $customer->email) }}" required>
                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
