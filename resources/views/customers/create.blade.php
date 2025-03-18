@@ -8,9 +8,20 @@
         <form action="{{ route('customers.store') }}" method="POST">
             @csrf
 
+            <!-- Display Validation Errors -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
             <div class="mb-3">
                 <label class="form-label">First Name</label>
-                <input type="text" name="first_name" class="form-control" required>
+                <input type="text" name="name" class="form-control" required>
             </div>
 
             <div class="mb-3">

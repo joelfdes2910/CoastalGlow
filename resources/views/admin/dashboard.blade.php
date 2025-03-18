@@ -52,14 +52,18 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($recentBookings as $booking)
+        @forelse($recentBookings as $booking)
             <tr>
                 <td>{{ $booking->id }}</td>
-                <td>{{ $booking->customer->first_name }} {{ $booking->customer->last_name }}</td>
+                <td>{{ $booking->customer->name }}</td>
                 <td>{{ $booking->created_at->format('d M Y') }}</td>
                 <td><span class="badge bg-success">Confirmed</span></td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="4" class="text-center">No Bookings Found</td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 

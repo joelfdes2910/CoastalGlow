@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2 class="mb-4">Customer Management</h2>
-        <a href="{{ route('customers.create') }}" class="btn btn-primary mb-3">Add Customer</a>
+{{--        <a href="{{ route('customers.create') }}" class="btn btn-primary mb-3">Add Customer</a>--}}
 
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -17,7 +17,7 @@
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Gender</th>
-                <th>Actions</th>
+{{--                <th>Actions</th>--}}
             </tr>
             </thead>
             <tbody>
@@ -28,14 +28,14 @@
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->phone }}</td>
                     <td>{{ ucfirst($customer->gender) }}</td>
-                    <td>
-                        <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
+{{--                    <td>--}}
+{{--                        <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm">Edit</a>--}}
+{{--                        <form action="{{ route('customers.destroy', $customer->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?');">--}}
+{{--                            @csrf--}}
+{{--                            @method('DELETE')--}}
+{{--                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>--}}
+{{--                        </form>--}}
+{{--                    </td>--}}
                 </tr>
             @endforeach
             </tbody>

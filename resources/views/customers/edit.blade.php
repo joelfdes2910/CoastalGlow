@@ -11,7 +11,7 @@
 
             <div class="mb-3">
                 <label class="form-label">First Name</label>
-                <input type="text" name="first_name" class="form-control" value="{{ $customer->first_name }}" required>
+                <input type="text" name="name" class="form-control" value="{{ $customer->name }}" required>
             </div>
 
             <div class="mb-3">

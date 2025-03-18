@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Service;
 use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,7 @@ class BookingController extends Controller
 
     public function create()
     {
-        $customers = Customer::all();
+        $customers = User::where('role','customer')->get();
         $staff = Staff::all();
         $services = Service::all();
         return view('bookings.create', compact('customers', 'staff', 'services'));
@@ -79,7 +80,7 @@ class BookingController extends Controller
     public function edit($id)
     {
         $booking = Booking::findOrFail($id);
-        $customers = Customer::all();
+        $customers = User::where('role','customer');
         $staff = Staff::all();
         $selectedServiceIds = $booking->services->pluck('id')->toArray();
 

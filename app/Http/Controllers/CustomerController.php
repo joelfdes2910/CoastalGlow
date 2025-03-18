@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
-use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -16,9 +16,16 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = Customer::latest()->paginate(10);
+        $customers = User::where('role','customer')->latest()->paginate(10);
         return view('customers.index', compact('customers'));
     }
+
+    public function show($id)
+    {
+        $customer = User::where('role', 'customer')->findOrFail($id);
+        return view('customers.show', compact('customer'));
+    }
+
 
     public function create()
     {
@@ -28,39 +35,42 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:customers,email',
+            'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|max:20',
             'gender' => 'required|in:male,female,other',
         ]);
 
-        Customer::create($request->all());
+
+        $request->merge(['role' => 'customer']);
+        User::create($request->all());
 
         return redirect()->route('customers.index')->with('success', 'Customer created successfully.');
     }
 
-    public function edit(Customer $customer)
+    public function edit(User $customer)
     {
         return view('customers.edit', compact('customer'));
     }
 
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, User $customer)
     {
         $request->validate([
-            'first_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:customers,email,' . $customer->id,
+            'email' => 'required|email|unique:users,email,' . $customer->id,
             'phone' => 'required|string|max:20',
-            'gender' => 'required|in:male,female,other',
+            'gender' => 'required',
         ]);
 
+        $request->merge(['role' => 'customer']);
         $customer->update($request->all());
 
         return redirect()->route('customers.index')->with('success', 'Customer updated successfully.');
     }
 
-    public function destroy(Customer $customer)
+    public function destroy(User $customer)
     {
         $customer->delete();
         return redirect()->route('customers.index')->with('success', 'Customer deleted successfully.');
