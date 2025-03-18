@@ -47,6 +47,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
 
 // Get staff services (Common for both roles)
 Route::get('/get-staff-services/{staff}', function ($staff) {
-    $staff = Staff::with('services:id,name,price')->find($staff);
+    $staff = Staff::with('services:id,name,price,duration')->find($staff); // Ensure 'duration' is included
     return response()->json($staff ? $staff->services : []);
 })->name('staff.services');
+
+

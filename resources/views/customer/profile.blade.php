@@ -35,6 +35,16 @@
                 @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <div>
+                    <input type="radio" name="gender" value="male" {{ old('gender', $customer->gender) == 'male' ? 'checked' : '' }}> Male
+                    <input type="radio" name="gender" value="female" {{ old('gender', $customer->gender) == 'female' ? 'checked' : '' }}> Female
+                    <input type="radio" name="gender" value="unisex" {{ old('gender', $customer->gender) == 'unisex' ? 'checked' : '' }}> Unisex
+                </div>
+                @error('gender') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
             <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>
     </div>

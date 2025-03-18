@@ -10,7 +10,7 @@ class CustomerController extends Controller
 {
     public function dashboard()
     {
-        $bookings = Booking::where('customer_id', auth()->id())->paginate(10);
+        $bookings = Booking::with('customer')->where('customer_id', auth()->id())->paginate(10);
         return view('customer.dashboard', compact('bookings')); // Make sure this view exists
     }
 
@@ -39,7 +39,7 @@ class CustomerController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|max:20',
-            'gender' => 'required|in:male,female,other',
+            'gender' => 'required|in:male,female,unisex',
         ]);
 
 

@@ -37,12 +37,18 @@ class DatabaseSeeder extends Seeder
         $services = Service::factory(10)->create();
 
         // Create Staff
-        $staff = Staff::factory(5)->create();
+        $staffMembers = Staff::factory(5)->create();
+
+        // Assign each staff member to 1 or more random services
+        foreach ($staffMembers as $staff) {
+            $randomServices = $services->random(rand(1, 5))->pluck('id'); // Select 1 to 5 random services
+            $staff->services()->attach($randomServices);
+        }
 
         // Create Bookings
         $bookings = Booking::factory(10)->create([
             'customer_id' => $customers->random()->id,
-            'staff_id' => $staff->random()->id,
+            'staff_id' => $staffMembers->random()->id,
         ]);
 
         // Attach Services to Bookings

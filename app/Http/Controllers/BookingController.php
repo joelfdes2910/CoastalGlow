@@ -41,8 +41,7 @@ class BookingController extends Controller
             'staff_id' => 'required|exists:staff,id',
             'date' => 'required|date_format:Y-m-d',
             'time' => 'required|date_format:H:i',
-            'services' => 'required|array|min:1',
-            'services.*' => 'exists:services,id',
+            'services' => 'required',  // Temporarily remove `array|min:1`
         ]);
 
         // Debugging: Log incoming data
@@ -74,7 +73,7 @@ class BookingController extends Controller
         $booking->services()->attach($attachData);
         $booking->update(['total_price' => $totalPrice]);
 
-        return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+        return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully.');
     }
 
     public function edit($id)

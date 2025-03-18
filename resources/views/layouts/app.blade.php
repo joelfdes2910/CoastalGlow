@@ -20,7 +20,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('customer.profile') }}">
+                <a class="navbar-brand" href="{{ route('bookings.create') }}">
                     <img src="{{ asset('lotus.png') }}" alt="SPA Logo" style="height: 50px;">
                 </a>
 
@@ -70,14 +70,21 @@
                                 @if(auth()->user()->role === 'customer')
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('customer.profile') }}">Home</a>
+                                            <a class="nav-link" href="{{ route('bookings.create') }}">Home</a>
                                         </li>
 
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('bookings.create') }}">Book Your Appointment</a>
+                                        <!-- Bookings Dropdown -->
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="bookingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Bookings
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="bookingsDropdown">
+                                                <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}">My Bookings</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('bookings.create') }}">Book An Appointment</a></li>
+                                            </ul>
                                         </li>
 
-                                        <li class="nav-item"><a class="nav-link" href="{{ route('customer.dashboard') }}">Bookings</a></li>
+
 
                                         <li class="nav-item"><a class="nav-link" href="{{ route('customer.profile') }}">Profile</a></li>
 

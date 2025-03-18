@@ -24,6 +24,7 @@ class CustomerProfileController extends Controller
             'last_name' => 'required|string|max:255',
             'email' => ['required', 'email', Rule::unique('users')->ignore($customer->id)],
             'phone' => 'nullable|string|max:15',
+            'gender' => 'required|in:male,female,unisex', // Validate gender
         ]);
 
         // Update customer details
@@ -32,6 +33,7 @@ class CustomerProfileController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'gender' => $request->gender,
         ]);
 
         return redirect()->route('customer.profile')->with('success', 'Profile updated successfully.');

@@ -16,28 +16,34 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Customer</th>
+                {{--<th>Customer</th>--}}
                 <th>Staff</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Services</th>
-                <th>Actions</th>
+                {{--<th>Actions</th>--}}
             </tr>
             </thead>
             <tbody>
             @forelse($bookings as $booking)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $booking->customer->first_name }} {{ $booking->customer->last_name }}</td>
+                    {{--<td>{{ $booking->customer->name }} {{ $booking->customer->last_name }}</td>--}}
                     <td>{{ $booking->staff->name }}</td>
-                    <td>{{ $booking->date }}</td>
-                    <td>{{ $booking->time }}</td>
+                    <td>{{ \Carbon\Carbon::parse($booking->date)->format('l, jS F Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($booking->time)->format('h:i A') }}</td>
                     <td>
-                        @foreach($booking->services as $service)
-                            <span class="badge bg-info">{{ $service->name }}</span>
-                        @endforeach
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach($booking->services as $service)
+                                <div class="border p-2 rounded bg-light text-dark" style="min-width: 150px;">
+                                    <strong class="d-block text-primary">{{ $service->name }}</strong>
+                                    <span class="text-muted">🕒 {{ $service->duration }} mins</span>
+                                    <span class="d-block text-success fw-bold">💰 ${{ $service->price }}</span>
+                                </div>
+                            @endforeach
+                        </div>
                     </td>
-                    <td>
+                    {{--<td>
                         <a href="{{ route('bookings.edit', $booking->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST" class="d-inline"
                               onsubmit="return confirm('Are you sure?');">
@@ -45,7 +51,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                         </form>
-                    </td>
+                    </td>--}}
                 </tr>
             @empty
                 <tr>
