@@ -64,15 +64,5 @@ class DatabaseSeeder extends Seeder
             Payment::factory()->create(['booking_id' => $booking->id]);
         });
 
-        // Create Carts
-        $carts = Cart::factory(10)->create();
-
-        // Create Cart Items
-        $carts->each(function ($cart) use ($services) {
-            CartItem::factory(3)->create([
-                'cart_id' => $cart->id,
-                'service_id' => $services->random()->id,
-            ]);
-        });
     }
 }

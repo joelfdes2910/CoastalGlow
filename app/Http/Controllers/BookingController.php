@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmationMail;
 use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\Payment;
@@ -10,6 +11,7 @@ use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -85,6 +87,16 @@ class BookingController extends Controller
             'amount' => $totalAmount,
             'status' => ($request->payment_method == 'cash') ? 'pending' : 'paid',
         ]);
+
+        // Get customer and admin emails
+        $customerEmail = $booking->customer->email;
+        $adminEmail = 'admin@example.com'; // Replace with your admin email
+
+        // Send email to the customer
+        Mail::to($customerEmail)->send(new BookingConfirmationMail($booking));
+
+        // Send email to admin
+        Mail::to($adminEmail)->send(new BookingConfirmationMail($booking));
 
         return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully.');
     }
