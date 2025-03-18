@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Customer;
+use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Staff;
 use App\Models\User;
@@ -72,6 +73,18 @@ class BookingController extends Controller
 
         $booking->services()->attach($attachData);
         $booking->update(['total_price' => $totalPrice]);
+
+        // Calculate total price
+        $totalAmount = Service::whereIn('id', $request->services)->sum('price');
+
+        // Store Payment
+        Payment::create([
+            'booking_id' => $booking->id,
+            'payment_method' => $request->payment_method,
+            'transaction_id' => $request->transaction_id,
+            'amount' => $totalAmount,
+            'status' => ($request->payment_method == 'cash') ? 'pending' : 'paid',
+        ]);
 
         return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully.');
     }

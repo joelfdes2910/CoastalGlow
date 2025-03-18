@@ -70,14 +70,32 @@
             <!-- Step 3: Select Date -->
             <div class="mb-4 d-none" id="date-section">
                 <label class="form-label fs-5 fw-bold">Select Date</label>
-                <input type="date" name="date" class="form-control" required>
+                <input type="date" name="date" id="date-input" class="form-control" required>
             </div>
 
             <!-- Step 4: Select Time -->
             <div class="mb-4 d-none" id="time-section">
                 <label class="form-label fs-5 fw-bold">Select Time</label>
-                <input type="time" name="time" class="form-control" required>
+                <input type="time" name="time" id="time-input" class="form-control" required>
             </div>
+
+
+            <!-- Payment Method Selection -->
+            <div class="mb-4 d-none" id="payment-section">
+                <label class="form-label fs-5 fw-bold">Payment Method</label>
+                <select name="payment_method" class="form-control" required>
+                    <option value="cash">Cash</option>
+                    <option value="card">Card</option>
+                    <option value="online">Online</option>
+                </select>
+            </div>
+
+            <!-- Transaction ID Field (Only for Card/Online Payments) -->
+            <div class="mb-4 d-none" id="transaction-id-field">
+                <label class="form-label fs-5 fw-bold">Transaction ID</label>
+                <input type="text" name="transaction_id" class="form-control">
+            </div>
+
 
             <div id="selected-services-container"></div>
             <input type="hidden" name="services[]" id="selected-services">
@@ -85,64 +103,40 @@
             <button type="submit" class="btn btn-primary mt-3 d-none" id="submit-button">Confirm Booking</button>
         </form>
 
-
-
-{{--        <form action="{{ route('bookings.store') }}"  method="POST">--}}
-{{--            @csrf--}}
-
-{{--           --}}{{-- <div class="mb-3">--}}
-{{--                <label class="form-label">Customer</label>--}}
-
-{{--                @if(auth()->user()->role === 'admin')--}}
-{{--                    <select name="customer_id" class="form-control" required>--}}
-{{--                        @foreach($customers as $customer)--}}
-{{--                            <option value="{{ $customer->id }}">{{ $customer->first_name }} {{ $customer->last_name }}</option>--}}
-{{--                        @endforeach--}}
-{{--                    </select>--}}
-{{--                @else--}}
-{{--                    <input type="hidden" name="customer_id" value="{{ auth()->user()->id }}">--}}
-{{--                    <input type="text" class="form-control" value="{{ auth()->user()->name }}" disabled>--}}
-{{--                @endif--}}
-{{--            </div>--}}
-
-{{--            <input type="hidden" name="customer_id" value="{{ auth()->user()->id }}">--}}
-
-{{--            <div class="mb-3">--}}
-{{--                <label for="staff" class="form-label">Select Staff</label>--}}
-{{--                <select name="staff_id" id="staff" class="form-control">--}}
-{{--                    <option value="">-- Select Staff --</option>--}}
-{{--                    @foreach($staff as $staffMember)--}}
-{{--                        <option value="{{ $staffMember->id }}">{{ $staffMember->name }}</option>--}}
-{{--                    @endforeach--}}
-{{--                </select>--}}
-{{--            </div>--}}
-
-{{--            <div class="mb-3">--}}
-{{--                <label class="form-label">Date</label>--}}
-{{--                <input type="date" name="date" class="form-control" required>--}}
-{{--            </div>--}}
-
-{{--            <div class="mb-3">--}}
-{{--                <label class="form-label">Time</label>--}}
-{{--                <input type="time" name="time" class="form-control" required>--}}
-{{--            </div>--}}
-
-{{--            <div class="mb-3">--}}
-{{--                <label for="services" class="form-label">Select Services</label>--}}
-{{--                <select name="services[]" id="services" class="form-control" multiple>--}}
-{{--                    <option value="">-- Select Service --</option>--}}
-{{--                    <!-- Services will be populated dynamically -->--}}
-{{--                </select>--}}
-{{--            </div>--}}
-
-{{--            <button type="submit" class="btn btn-primary">Save Booking</button>--}}
-{{--        </form>--}}
     </div>
 @endsection
 
 @push('js')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Auto-select current date and time
+            function setCurrentDateTime() {
+                let now = new Date();
+
+                // Format date as YYYY-MM-DD
+                let formattedDate = now.toISOString().split('T')[0];
+                $('#date-input').val(formattedDate);
+
+                // Format time as HH:MM (24-hour format)
+                let hours = now.getHours().toString().padStart(2, '0');
+                let minutes = now.getMinutes().toString().padStart(2, '0');
+                let formattedTime = `${hours}:${minutes}`;
+                $('#time-input').val(formattedTime);
+            }
+
+            // Set current date and time on page load
+            setCurrentDateTime();
+
+            // When a service is selected, show date/time fields with auto-selected values
+            $(document).on('click', '.service-box', function () {
+                $('#date-section, #time-section').removeClass('d-none');
+                setCurrentDateTime(); // Ensure date/time is updated when service is selected
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function () {
             // Staff selection
@@ -189,6 +183,7 @@
             });
 
             // Service selection
+            // Handle service selection
             $(document).on('click', '.service-box', function () {
                 $(this).toggleClass('active');
 
@@ -205,10 +200,22 @@
                     );
                 });
 
+                // Show date, time, and payment sections if services are selected
                 if (selectedServices.length > 0) {
-                    $('#date-section, #time-section, #submit-button').removeClass('d-none');
+                    $('#date-section, #time-section, #payment-section, #submit-button').removeClass('d-none');
                 } else {
-                    $('#date-section, #time-section, #submit-button').addClass('d-none');
+                    $('#date-section, #time-section, #payment-section, #transaction-id-field, #submit-button').addClass('d-none');
+                }
+            });
+
+            // Handle Payment Method Selection
+            $('select[name="payment_method"]').change(function () {
+                let selectedMethod = $(this).val();
+                if (selectedMethod === 'card' || selectedMethod === 'online') {
+                    $('#transaction-id-field').removeClass('d-none');
+                } else {
+                    $('#transaction-id-field').addClass('d-none');
+                    $('input[name="transaction_id"]').val(''); // Clear transaction ID input
                 }
             });
 
