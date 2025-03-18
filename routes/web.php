@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CustomerProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StaffController;
 use App\Models\Staff;
@@ -37,6 +38,11 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::get('/customer/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
     Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+
+    Route::get('/customer/profile', [CustomerProfileController::class, 'edit'])->name('customer.profile');
+    Route::post('/customer/profile', [CustomerProfileController::class, 'update'])->name('customer.profile.update');
+
+
 });
 
 // Get staff services (Common for both roles)

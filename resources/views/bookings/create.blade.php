@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-3">Add Booking</h2>
+        <h2 class="mb-3">Book Your Appointment</h2>
 
         {{--<a href="{{ route('bookings.index') }}" class="btn btn-secondary mb-3">Back</a>--}}
 

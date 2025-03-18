@@ -76,15 +76,18 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'phone' => 'nullable|string|max:15',
+            'last_name' => 'nullable|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'gender' => 'required|in:male,female,unisex',
         ]);
 
         $user = User::create([
+            'role' => 'customer', // Automatically assign 'customer' role
             'name' => $request->name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
@@ -93,6 +96,14 @@ class RegisterController extends Controller
         ]);
 
         Auth::login($user);
+
+        if ($user->isAdmin()) {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user->isStaff()) {
+            return redirect()->route('staff.dashboard');
+        } elseif ($user->isCustomer()) {
+            return redirect()->route('bookings.create');
+        }
 
         return redirect()->route('customer.dashboard');
     }

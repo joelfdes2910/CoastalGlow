@@ -66,7 +66,7 @@ class LoginController extends Controller
             } elseif ($user->isStaff()) {
                 return redirect()->route('staff.dashboard');
             } elseif ($user->isCustomer()) {
-                return redirect()->route('customer.dashboard');
+                return redirect()->route('bookings.create');
             }
         }
 

@@ -23,8 +23,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'SPA') }}
+                    <img src="{{ asset('lotus.png') }}" alt="SPA Logo" style="height: 50px;">
                 </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -71,9 +72,17 @@
                                 @if(auth()->user()->role === 'customer')
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('customer.dashboard') }}">Dashboard</a>
+                                            <a class="nav-link" href="{{ url('/') }}">Home</a>
                                         </li>
-                                        <li class="nav-item"><a class="nav-link" href="{{ route('bookings.create') }}">New Booking</a></li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('bookings.create') }}">Book Your Appointment</a>
+                                        </li>
+
+                                        <li class="nav-item"><a class="nav-link" href="{{ route('customer.dashboard') }}">Bookings</a></li>
+
+                                        <li class="nav-item"><a class="nav-link" href="{{ route('customer.profile') }}">Profile</a></li>
+
                                 @endif
                             </ul>
 

@@ -2,12 +2,15 @@
 
 @section('content')
     <div class="container">
-        <h1>My Bookings</h1>
+
+        <h4>My Recent Bookings</h4>
+        <br>
+
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <a href="{{ route('bookings.create') }}" class="btn btn-primary mb-3">Add Booking</a>
+        {{--<a href="{{ route('bookings.create') }}" class="btn btn-primary mb-3">Add Booking</a>--}}
 
         <table class="table table-bordered">
             <thead>

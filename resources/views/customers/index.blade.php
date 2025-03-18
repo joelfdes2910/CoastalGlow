@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="container">
@@ -24,7 +24,7 @@
             @foreach($customers as $customer)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $customer->first_name }} {{ $customer->last_name }}</td>
+                    <td>{{ $customer->name }} {{ $customer->last_name }}</td>
                     <td>{{ $customer->email }}</td>
                     <td>{{ $customer->phone }}</td>
                     <td>{{ ucfirst($customer->gender) }}</td>
