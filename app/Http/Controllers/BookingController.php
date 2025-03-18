@@ -9,9 +9,11 @@ use App\Models\Payment;
 use App\Models\Service;
 use App\Models\Staff;
 use App\Models\User;
+use App\Notifications\NewBookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class BookingController extends Controller
 {
@@ -28,6 +30,14 @@ class BookingController extends Controller
         }
         return view('bookings.index', compact('bookings'));
     }
+
+    public function show($id)
+    {
+        $booking = Booking::with(['customer', 'staff', 'services', 'payment'])->findOrFail($id);
+
+        return view('admin.bookings.show', compact('booking'));
+    }
+
 
     public function create()
     {
@@ -97,6 +107,10 @@ class BookingController extends Controller
 
         // Send email to admin
         Mail::to($adminEmail)->send(new BookingConfirmationMail($booking));
+
+        // Send notification to Admins
+        $adminUsers = User::where('role', 'admin')->get();
+        Notification::send($adminUsers, new NewBookingNotification($booking));
 
         return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully.');
     }

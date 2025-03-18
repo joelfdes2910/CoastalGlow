@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomerProfileController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StaffController;
 use App\Models\Staff;
@@ -24,6 +25,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Admin Routes (Only Admin can access)
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/admin/notifications/{id}', [NotificationController::class, 'show'])->name('notifications.show');
+
 
     // Admin can manage everything
     Route::resource('services', ServiceController::class);
