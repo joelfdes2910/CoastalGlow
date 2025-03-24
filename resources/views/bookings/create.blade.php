@@ -165,7 +165,7 @@
                                 serviceContainer.append(
                                     `<div class="service-box p-2 border" data-id="${service.id}">
                         <strong>${service.name}</strong>
-                        <p>${service.duration} mins - $${service.price}</p>
+                        <p>${service.duration} mins - £${service.price}</p>
                     </div>`
                                 );
                             });
