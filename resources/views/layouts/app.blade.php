@@ -12,7 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link href="{{ asset('front_style.css') }}" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('bookings.create') }}">
-                    <img src="{{ asset('lotus.png') }}" alt="SPA Logo" style="height: 50px;">
+                    <img src="{{ asset('lotus.png') }}" alt="SPA Logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -69,7 +69,7 @@
 
                                 @if(auth()->user()->role === 'customer')
 
-                                        <li class="nav-item">
+                                        <li class="nav-item {{ request()->routeIs('bookings.create') ? 'active' : '' }}" >
                                             <a class="nav-link" href="{{ route('bookings.create') }}">Home</a>
                                         </li>
 
@@ -115,7 +115,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="min-height: calc(100vh - 180px);">
             @yield('content')
         </main>
     </div>

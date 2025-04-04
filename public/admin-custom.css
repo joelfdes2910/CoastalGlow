@@ -1,0 +1,167 @@
+/* admin-custom.css */
+:root {
+    --primary: #40E0D0;
+    --primary-light: #6BE6DA;
+    --primary-dark: #36C9BA;
+}
+
+/* Override AdminLTE primary color */
+.bg-primary, .bg-info {
+    background-color: var(--primary) !important;
+}
+
+/* Small Boxes */
+.small-box {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.small-box .icon {
+    color: rgba(255,255,255,0.3) !important;
+}
+
+.bg-info { background-color: var(--primary) !important; }
+.bg-success { background-color: #28a745 !important; }
+.bg-warning { background-color: #ffc107 !important; }
+.bg-danger { background-color: #dc3545 !important; }
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* Navbar */
+.main-header .navbar {
+    background-color: var(--primary) !important;
+}
+
+/* Sidebar */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* Badges */
+.badge-primary {
+    background-color: var(--primary) !important;
+}
+
+/* Table */
+.table-primary, .table-primary > th, .table-primary > td {
+    background-color: var(--primary-light) !important;
+}
+
+/* Pagination */
+.page-item.active .page-link {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Cards */
+.card-primary.card-outline {
+    border-top: 3px solid var(--primary) !important;
+}
+
+/* Progress Bars */
+.progress-bar {
+    background-color: var(--primary) !important;
+}
+
+
+/* Body Background */
+.content-wrapper {
+    background-color: #f8f9fa !important; /* Light gray background */
+}
+
+/* Sidebar Styling */
+.main-sidebar {
+    background-color: #40E0D0 !important; /* Your primary color */
+}
+
+/* Sidebar Brand/Logo Area */
+.brand-link {
+    background-color: #36C9BA !important; /* Slightly darker shade */
+    border-bottom: 1px solid #2DB3A4 !important;
+}
+
+/* Sidebar Menu Items */
+.nav-sidebar .nav-item > .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-sidebar .nav-item > .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+}
+
+/* Active Menu Item */
+.nav-sidebar .nav-item > .nav-link.active {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: white !important;
+    border-left: 3px solid white !important;
+}
+
+/* Sidebar Headers */
+.nav-sidebar .nav-header {
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    padding: 10px 25px;
+}
+
+/* Sidebar Treeview Menu */
+.nav-treeview .nav-item > .nav-link {
+    padding-left: 55px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Navbar Styling */
+.main-header {
+    background-color: #40E0D0 !important;
+    border-bottom: 1px solid #36C9BA !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Content Header */
+.content-header {
+    background-color: white !important;
+    padding: 15px 20px !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+
+/* Cards */
+.card {
+    border-radius: 8px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid #eee !important;
+}
+
+.card-header {
+    background-color: white !important;
+    border-bottom: 1px solid #eee !important;
+}

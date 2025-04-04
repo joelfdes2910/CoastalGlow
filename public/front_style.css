@@ -1,0 +1,281 @@
+/* front_style.css */
+:root {
+    --primary-color: #40E0D0;
+    --secondary-color: white;
+}
+
+/* General Styles */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--primary-color) !important;
+    color: #333;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+}
+
+.navbar-brand {
+    padding: 0;
+}
+
+
+/* Navigation Links */
+.nav-link {
+    color: #333 !important;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+    color: var(--primary-color) !important;
+}
+
+/* Active Navigation Item */
+.nav-item.active .nav-link,
+.nav-link.active {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.5rem;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    background-color: var(--primary-color) !important;
+    color: var(--secondary-color);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #36C9BA !important;
+    border-color: #36C9BA;
+    color: white;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+/* User Dropdown */
+#navbarDropdown {
+    display: flex;
+    align-items: center;
+}
+
+/* Main Content */
+main {
+    min-height: calc(100vh - 180px);
+}
+
+/* Footer */
+footer {
+    background-color: #f8f9fa !important;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
+
+    .navbar-collapse {
+        padding-top: 1rem;
+    }
+
+    .nav-link {
+        margin: 0.25rem 0;
+    }
+}
+
+/* Active State for Current Page */
+.nav-item.active {
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Dropdown Toggle Arrow Color */
+.dropdown-toggle::after {
+    border-top-color: #333;
+}
+
+.dropdown-toggle:hover::after {
+    border-top-color: var(--primary-color);
+}
+
+/* Form Elements */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(64, 224, 208, 0.25);
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+/* Tables */
+.table thead th {
+    background-color: var(--primary-color) !important;
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Alerts */
+.alert-primary {
+    background-color: var(--primary-color) !important;
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Base Button Styles - Always Visible */
+.btn {
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1.5rem !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border: 2px solid transparent !important; /* Ensures border exists */
+    display: inline-block !important;
+    opacity: 1 !important; /* Force full visibility */
+}
+
+/* Primary Button - Always Visible */
+.btn-primary {
+    background-color: #36C9BA !important;
+    border-color: #36C9BA !important;
+    color: var(--secondary-color) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #36C9BA !important;
+    border-color: #36C9BA !important;
+    color: var(--secondary-color) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Outline Button - Always Visible */
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    background-color: transparent !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+    background-color: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+}
+
+/* Secondary Button - Always Visible */
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    background-color: #f0f0f0 !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Ensure all buttons are visible by default */
+.btn:not(:hover):not(:focus):not(:active) {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Fix for invisible buttons in button groups */
+.btn-group .btn {
+    visibility: visible !important;
+}
+
+/* Special case for disabled buttons */
+.btn:disabled {
+    opacity: 0.65 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+    visibility: visible !important;
+}
+
+.staff-card:hover, .staff-card.active {
+    background-color: #40E0D0 !important;
+    color: #fff;
+}
+
+
+.service-box.active {
+    background-color: #40E0D0 !important;
+    color: #fff;
+}
+
+.navbar-nav ul.navbar-nav a.nav-link {
+    color: #fff !important;
+}
+
+
+.navbar-expand-md .navbar-nav li.nav-item.dropdown a#navbarDropdown {
+    color: #fff !important;
+}
+
+nav.navbar.navbar-expand-md.navbar-light.bg-white.shadow-sm {
+    background-color: rgb(64 224 208) !important;
+}
+
+
+.navbar-brand img {
+    /* height: 60px; */ /* Adjusted logo size */
+    transition: all 0.3s ease;
+    max-width: 90px !important;
+    filter: brightness(0.5) !important;
+}

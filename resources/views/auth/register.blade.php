@@ -8,6 +8,30 @@
     <!-- AdminLTE Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+
+    <style>
+
+        :root {
+            --primary-color: #40E0D0;
+            --secondary-color: white;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--primary-color) !important;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 0;
+        }
+    </style>
+
+
 </head>
 
 <body class="hold-transition register-page">
