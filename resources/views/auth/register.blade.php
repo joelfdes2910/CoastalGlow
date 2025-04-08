@@ -23,11 +23,9 @@
             color: #333;
         }
 
-        /* Navigation Bar */
-        .navbar {
-            background-color: var(--primary-color) !important;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 0.5rem 0;
+        .login-logo a img {
+            transition: all 0.3s ease;            
+            filter: brightness(0.5) !important;
         }
     </style>
 
@@ -127,6 +125,9 @@
                 <div class="row">
                     <div class="col-8">
                         <a href="{{ route('login') }}" class="text-center">Already have an account? Login</a>
+                    </div>
+                    <div class="col-8">
+                        <a href="{{ url('/') }}" class="text-center">Return to Coastal Glow</a>
                     </div>
                     <div class="col-4">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>

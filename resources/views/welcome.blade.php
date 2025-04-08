@@ -39,26 +39,49 @@
         }
 
         .hero-section {
-            background-color: white;
-            padding: 100px 0;
-            text-align: center;
-        }
+    background: url(/homepage.jpeg) no-repeat center center;    
+    padding: 100px 0;
+    text-align: center;
+    position: relative;
+    height: 800px;
+    color: white;
+    background-size: cover;
+}
 
-        .hero-title {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #333;
-        }
+    /* Add an overlay to make text more readable if needed */
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3); /* Adjust opacity as needed */
+        z-index: 0;
+    }
 
-        .hero-subtitle {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .hero-section .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Update text colors for better visibility */
+    .hero-title {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: white;
+    }
+
+    .hero-subtitle {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 40px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 
         .btn-primary {
             background-color: #40E0D0;
@@ -89,12 +112,7 @@
             color: #555;
         }
 
-        /* Logo styling */
-        .navbar-brand img {
-            height: 50px; /* Increased from 40px to 50px */
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
+     
 
         /* Active nav item styling */
         .navbar-default .navbar-nav > .active > a,

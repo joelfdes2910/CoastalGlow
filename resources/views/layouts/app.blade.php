@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'SPA') }}</title>
+    <title>{{ config('app.name', 'Coastal Glow') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -15,13 +15,16 @@
     <link href="{{ asset('front_style.css') }}" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('bookings.create') }}">
-                    <img src="{{ asset('lotus.png') }}" alt="SPA Logo">
+                    <img src="{{ asset('lotus.png') }}" alt="Coastal Glow Logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -69,8 +72,8 @@
 
                                 @if(auth()->user()->role === 'customer')
 
-                                        <li class="nav-item {{ request()->routeIs('bookings.create') ? 'active' : '' }}" >
-                                            <a class="nav-link" href="{{ route('bookings.create') }}">Home</a>
+                                        <li class="nav-item {{ request()->routeIs('customer.dashboard') ? 'active' : '' }}" >
+                                            <a class="nav-link" href="{{ route('customer.dashboard') }}">Home</a>
                                         </li>
 
                                         <!-- Bookings Dropdown -->
@@ -79,7 +82,7 @@
                                                 Bookings
                                             </a>
                                             <ul class="dropdown-menu" aria-labelledby="bookingsDropdown">
-                                                <li><a class="dropdown-item" href="{{ route('customer.dashboard') }}">My Bookings</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('customer.bookings') }}">My Bookings</a></li>
                                                 <li><a class="dropdown-item" href="{{ route('bookings.create') }}">Book An Appointment</a></li>
                                             </ul>
                                         </li>

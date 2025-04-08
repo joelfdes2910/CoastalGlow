@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Response;
+
 class BookingController extends Controller
 {
     public function index()
@@ -103,16 +106,23 @@ class BookingController extends Controller
         $adminEmail = 'admin@example.com'; // Replace with your admin email
 
         // Send email to the customer
-        Mail::to($customerEmail)->send(new BookingConfirmationMail($booking));
+        //Mail::to($customerEmail)->send(new BookingConfirmationMail($booking));
 
         // Send email to admin
-        Mail::to($adminEmail)->send(new BookingConfirmationMail($booking));
+       // Mail::to($adminEmail)->send(new BookingConfirmationMail($booking));
+
+
+       
 
         // Send notification to Admins
         $adminUsers = User::where('role', 'admin')->get();
         Notification::send($adminUsers, new NewBookingNotification($booking));
 
-        return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully.');
+        return view('bookings.success', [
+            'pdfUrl' => route('booking.pdf', $booking->id),
+        ]);
+
+        //return redirect()->route('customer.dashboard')->with('success', 'Booking created successfully.');
     }
 
     public function edit($id)

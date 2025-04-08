@@ -29,6 +29,13 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 0.5rem 0;
         }
+
+
+        .login-logo a img {
+            transition: all 0.3s ease;            
+            filter: brightness(0.5) !important;
+        }
+
     </style>
 
 </head>
@@ -41,7 +48,7 @@
 
     <div class="login-logo">
         <a href="#">
-            <img src="{{ asset('lotus.png') }}" alt="SPA Logo" width="150">
+            <img src="{{ asset('lotus.png') }}" alt="Coastal Glow Logo" width="150">
         </a>
     </div>
 
@@ -108,6 +115,10 @@
             <p class="mb-0">
                 Don't have an account? <a href="{{ route('register') }}" class="text-center">Register</a>
             </p>
+
+            <p class="mb-0">
+                        <a href="{{ url('/') }}" class="text-center">Return to Coastal Glow</a>
+                    </p>
 
         </div>
     </div>

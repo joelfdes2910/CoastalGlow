@@ -1,67 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
 
-        <h4>My Recent Bookings</h4>
-        <br>
 
-        @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
 
-        {{--<a href="{{ route('bookings.create') }}" class="btn btn-primary mb-3">Add Booking</a>--}}
+<style>
+.hero-section {
+    background: url('{{ asset('customerpage.jpeg') }}') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    padding: 100px 0;
+    text-align: center;
+    color: #333;
+    opacity: 0.7;
+}
 
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>#</th>
-                {{--<th>Customer</th>--}}
-                <th>Staff</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Services</th>
-                {{--<th>Actions</th>--}}
-            </tr>
-            </thead>
-            <tbody>
-            @forelse($bookings as $booking)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    {{--<td>{{ $booking->customer->name }} {{ $booking->customer->last_name }}</td>--}}
-                    <td>{{ $booking->staff->name }}</td>
-                    <td>{{ \Carbon\Carbon::parse($booking->date)->format('l, jS F Y') }}</td>
-                    <td>{{ \Carbon\Carbon::parse($booking->time)->format('h:i A') }}</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            @foreach($booking->services as $service)
-                                <div class="border p-2 rounded bg-light text-dark" style="min-width: 150px;">
-                                    <strong class="d-block text-primary">{{ $service->name }}</strong>
-                                    <span class="text-muted">🕒 {{ $service->duration }} mins</span>
-                                    <span class="d-block text-success fw-bold">💰 ${{ $service->price }}</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    </td>
-                    {{--<td>
-                        <a href="{{ route('bookings.edit', $booking->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST" class="d-inline"
-                              onsubmit="return confirm('Are you sure?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>--}}
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="7" class="text-center">No Bookings found.</td>
-                </tr>
-            @endforelse
-            </tbody>
-        </table>
+/* Optional overlay for readability */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.7);
+    z-index: 0;
+}
 
-        {{ $bookings->links('vendor.pagination.bootstrap-4') }} <!-- Pagination -->
-
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+</style>
+<section class="hero-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hero-content">
+          <h1 class="hero-title">Salon & Spa Booking and Business <br>Management Web Application </h1>
+          <p class="hero-subtitle">Streamline your beauty appointments with our easy-to-use platform</p>
+          <a href="{{ route('bookings.create') }}" class="btn btn-primary">Book Now</a>
+        </div>
+      </div>
     </div>
+  </div>
+</section>   
 @endsection

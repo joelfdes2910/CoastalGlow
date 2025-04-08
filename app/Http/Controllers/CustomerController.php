@@ -10,8 +10,13 @@ class CustomerController extends Controller
 {
     public function dashboard()
     {
+        return view('customer.dashboard'); // Make sure this view exists
+    }
+
+    public function bookings()
+    {
         $bookings = Booking::with('customer')->where('customer_id', auth()->id())->paginate(10);
-        return view('customer.dashboard', compact('bookings')); // Make sure this view exists
+        return view('customer.bookings', compact('bookings')); // Make sure this view exists
     }
 
     public function index()
@@ -25,7 +30,6 @@ class CustomerController extends Controller
         $customer = User::where('role', 'customer')->findOrFail($id);
         return view('customers.show', compact('customer'));
     }
-
 
     public function create()
     {
