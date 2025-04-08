@@ -163,7 +163,7 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="{{ request()->is('/') ? 'active' : '' }}"><a href="{{ route('bookings.create') }}">Home</a></li>
-                <li class="{{ request()->is('services') ? 'active' : '' }}"><a href="{{ route('services.index') }}">Services</a></li>
+                <!-- <li class="{{ request()->is('services') ? 'active' : '' }}"><a href="{{ route('services.index') }}">Services</a></li> -->
                 @if (Route::has('login'))
                     @auth
                         @php
